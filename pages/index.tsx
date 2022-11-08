@@ -33,7 +33,7 @@ interface StateTypes {
   operand: string
 }
 
-const reducer = (state: StateTypes, { type, payload }: ActionTypes) => {
+const reducer = (state: StateTypes, { type, payload }: ActionTypes): any => {
   // console.log()
 
   // console.log(parseInt(state.currentValue, 10))
@@ -127,9 +127,8 @@ const reducer = (state: StateTypes, { type, payload }: ActionTypes) => {
       return { currentValue: '0' }
 
     default:
-      break
+      return state
   }
-  return {}
 }
 function calculateValues({ currentValue, prevValue, operand }: StateTypes) {
   // console.log(Math.floor(currentValue), +prevValue)
@@ -199,7 +198,9 @@ export default function Home() {
                 size='md'
                 width={'100%'}
                 fontSize='2xl'
-                onClick={() => dispatch({ type: Operations.ALL_CLEAR })}
+                onClick={() =>
+                  dispatch({ type: Operations.ALL_CLEAR, payload: '' })
+                }
               >
                 AC
               </Button>
@@ -209,7 +210,9 @@ export default function Home() {
               colorScheme='teal'
               size='md'
               fontSize='2xl'
-              onClick={() => dispatch({ type: Operations.DELETE_NUMBER })}
+              onClick={() =>
+                dispatch({ type: Operations.DELETE_NUMBER, payload: '' })
+              }
             >
               DEL
             </Button>
@@ -371,7 +374,9 @@ export default function Home() {
                 size='md'
                 width={'100%'}
                 fontSize='xl'
-                onClick={() => dispatch({ type: Operations.EQUAL })}
+                onClick={() =>
+                  dispatch({ type: Operations.EQUAL, payload: '' })
+                }
               >
                 =
               </Button>
